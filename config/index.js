@@ -10,11 +10,12 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
+    proxyTable: {  // 输入/api 让其去访问http://localhost:3000/api
       '/api': {
-        target: 'http://localhost:3000/',
+        target: 'http://localhost:3000',
+        changeOrigin: true,
         pathRewrite: {
-          '^/api': ''
+          '^/api': '' // 这是一个通配符，设置完了之后每个接口都要在前面加上/api（特别注意这一点）
         }
       }
 

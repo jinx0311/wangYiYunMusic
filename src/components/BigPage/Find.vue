@@ -2,13 +2,14 @@
   <div class="hello">
     <div class="nav">
       <van-swipe :autoplay="3000" indicator-color="white">
-        <van-swipe-item  v-for="item in banners"><img :src="item.pic" alt="" /></van-swipe-item>
+        <van-swipe-item  v-for="(item,index) in banners" :key="index"><img :src="item.pic" alt="" /></van-swipe-item>
       </van-swipe>
     </div>
   </div>
 </template>
 
 <script>
+  import { banner } from '@/request/api'
   import axios from 'axios'
   export default {
     name: 'Find',
@@ -24,7 +25,7 @@
     methods:{
       getList(){
         let that=this
-        axios.get('http://localhost:3000/banner?type=1')
+        axios.get('/api/banner?type=1')
           .then(function (response) {
             console.log(response.data.banners);
             that.banners=response.data.banners;
