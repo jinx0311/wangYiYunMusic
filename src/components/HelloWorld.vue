@@ -3,7 +3,7 @@
       <van-row class="nav">
         <van-col style="text-align: left" span="4" @click="showPopup"><van-icon name="orders-o" /></van-col>
         <ul>
-          <li v-for="(item,index,key) in topList" @click="handTpId(index)" :class='{active:index==topLiId}'  >{{item}}</li>
+          <li v-for="(item,index,key) in topList" :key="index" @click="handTpId(index)" :class='{active:index==topLiId}'  >{{item}}</li>
         </ul>
         <van-col style="text-align: right" span="4"><van-icon name="search" /></van-col>
       </van-row>
@@ -34,8 +34,8 @@
       v-model="loading"
     >
       <van-cell
-        v-for="item in list"
-        :key="item"
+        v-for="(item,index) in list"
+        :key="index"
         :title="item.title"
         :icon="item.icon"
       />
@@ -55,7 +55,7 @@ export default {
       banners:[],
       topList:['我的','发现','云村','视频'],
       topLiId:1,
-      popup:true,
+      popup:false,
       list:[
         {
           icon:'video-o',
