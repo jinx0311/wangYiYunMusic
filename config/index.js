@@ -7,7 +7,7 @@ const path = require('path')
 module.exports = {
   dev: {
 
-    // Paths
+    // Path
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {  // 输入/api 让其去访问http://localhost:3000/api

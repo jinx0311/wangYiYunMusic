@@ -56,9 +56,9 @@
           </li>
         </ul>
         <div class="pup_bottom">
-          <van-button color="rgb(0,0,0,0)"><van-icon name="closed-eye" size="1.2rem" />夜间模式</van-button>
-          <van-button color="rgb(0,0,0,0)"><van-icon name="setting-o" size="1.2rem" />设置</van-button>
-          <van-button color="rgb(0,0,0,0)"><van-icon name="close" size="1.2rem" />退出</van-button>
+          <van-button color="rgb(0,0,0,0)"><van-icon name="closed-eye" size="1.2rem" /><span>夜间模式</span></van-button>
+          <van-button color="rgb(0,0,0,0)"><van-icon name="setting-o" size="1.2rem" /><span>设置</span></van-button>
+          <van-button color="rgb(0,0,0,0)"><van-icon name="close" size="1.2rem" /><span>退出</span></van-button>
         </div>
       </van-popup>
       <router-view />
