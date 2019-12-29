@@ -6,6 +6,7 @@
  import Vant from 'vant';
  import 'vant/lib/index.css';
  import axios from 'axios';
+ import 'lib-flexible/flexible'
 
 Vue.use(Vant);
 Vue.prototype.$ajax = axios;
