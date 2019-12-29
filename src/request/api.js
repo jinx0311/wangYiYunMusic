@@ -11,7 +11,13 @@ axios.defaults.timeout = 30000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 
 export default{
-  bannerSwiperFn () {
-    return axios.get(bannerSwiper)
+  'login':{
+    'name':'登录',
+    'type':'get',
+    'path':'/login'
+  },
+  'getUserInfo':{
+    'name':'获取用户信息',
+    'path':'/user/subcount',
   }
 }
