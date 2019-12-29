@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    import request from '../../request'
+    import request from '../request'
   import axios from 'axios'
   export default {
     name: 'Find',

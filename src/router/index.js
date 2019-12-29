@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import HelloWorld from '@/page/HelloWorld'
 import layout from '@/components/layout'
-import find from '@/components/BigPage/Find'
-import My from '@/components/BigPage/My'
-import YunCun from '@/components/BigPage/YunCun'
-import MyVideo from '@/components/BigPage/MyVideo'
+import find from '@/page/Find'
+import My from '@/page/My'
+import YunCun from '@/page/YunCun'
+import MyVideo from '@/page/MyVideo'
 import login from '@/page/login'
 Vue.use(Router)
 
@@ -33,7 +33,7 @@ export default new Router({
               component:My
             },
             {
-              path:'video',
+              path:'myvideo',
               name:MyVideo,
               component:MyVideo
             },
