@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import { banner } from '@/request/api'
+    import request from '../../request'
   import axios from 'axios'
   export default {
     name: 'Find',
@@ -24,8 +24,9 @@
     },
     methods:{
       getList(){
+          console.log("banner")
         let that=this
-        axios.get('/api/banner?type=1')
+          request.ajax('banner')
           .then(function (response) {
             console.log(response.data.banners);
             that.banners=response.data.banners;

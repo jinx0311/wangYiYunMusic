@@ -3,7 +3,7 @@
       <van-row class="nav">
         <van-col style="text-align: left" span="4" @click="showPopup"><van-icon name="orders-o" /></van-col>
         <ul>
-          <li v-for="(item,index,key) in topList" :key="index" @click="handTpId(index)" :class='{active:index==topLiId}'  >{{item}}</li>
+          <li v-for="(item,index,key) in topList" :key="index" @click="handTpId(index)" :class='{active:index==topLiId}'  ><router-link :to="item.url">{{item.title}}</router-link></li>
         </ul>
         <van-col style="text-align: right" span="4"><van-icon name="search" /></van-col>
       </van-row>
@@ -61,16 +61,6 @@
           <van-button color="rgb(0,0,0,0)"><van-icon name="close" size="1.2rem" /><span>退出</span></van-button>
         </div>
       </van-popup>
-      <van-list
-        v-model="loading"
-      >
-        <van-cell
-          v-for="(item,index) in list"
-          :key="index"
-          :title="item.title"
-          :icon="item.icon"
-        />
-      </van-list>
       <router-view />
   </div>
 </template>
@@ -141,7 +131,25 @@
       loading:true,
       nav:[],
       banners:[],
-      topList:['我的','发现','云村','视频'],
+      topList:[
+          {
+              title:'我的',
+              url:'my'
+          },
+          {
+              title:'发现',
+              url:'find'
+          },
+          {
+              title:'云村',
+              url:'yuncun'
+          },
+          {
+              title:'视频',
+              url:'myvideo'
+          },
+
+      ],
       topLiId:1,
       popup:false,
       list:[
@@ -171,6 +179,7 @@
   methods:{
     handTpId(index){
       this.topLiId=index;
+      console.log(this.$route.path)
     },
     showPopup() {
       this.popup = true;
@@ -181,6 +190,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
+  li a{
+    color:#ffffff;
+  }
   .pup_bottom{
     position: absolute;
     bottom: 0;

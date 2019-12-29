@@ -18,6 +18,10 @@ export default{
   },
   'getUserInfo':{
     'name':'获取用户信息',
-    'path':'/user/subcount',
+    'path':'/user/subcount'
+  },
+  'banner':{
+    'name':'获取首页轮播图',
+    'path':'/banner?type=1'
   }
 }
