@@ -7,10 +7,7 @@
     </div>
     <div class="nav-list">
       <van-row type="flex" justify="space-around">
-        <van-col span="4">
-          <div>
-            <div class="img-wrap"></div>每日推荐</div>
-        </van-col>
+        <van-col span="4"><div><div class="img-wrap"></div>每日推荐</div></van-col>
         <van-col span="4"><div><div class="img-wrap"></div>歌单</div></van-col>
         <van-col span="4"><div><div class="img-wrap"></div>排行榜</div></van-col>
         <van-col span="4"><div><div class="img-wrap"></div>电台</div></van-col>
@@ -76,16 +73,18 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" scoped>
+
   .nav img{
     width: 100%;
     height: 25vh;
   }
   .nav{
-    padding 0 20px
-    border-radius 10Px
+    /*padding 0 20px*/
+    /*margin-top 20px*/
+    /*border-radius 10Px*/
     font-size 20Px/*no*/
     overflow hidden
-    margin-top 20px
+
   }
   .logo{
     height: 80%;
