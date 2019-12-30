@@ -14,7 +14,7 @@ const request = {
       },{
         withCredentials: true
       }).then(res => {
-         return res
+         return res.data
       }).catch(error => {
         return error
       })
@@ -22,7 +22,7 @@ const request = {
       return axios.post(url,data,{
         withCredentials: true
       }).then(res => {
-        return res
+        return res.data
       }).catch(error => {
         return error
       })

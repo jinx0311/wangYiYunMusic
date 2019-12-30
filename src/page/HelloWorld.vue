@@ -262,7 +262,7 @@
   opacity: 0.3;
 }
 .active{
-  font-size: 1.2rem;
+  font-size: 38px;
   color: #ffffff;
   font-weight: 800;
 }
@@ -273,7 +273,7 @@
   justify-content: center;
   align-items: center;
   padding: 8px 2.5%;
-  font-size: 1rem;
+  font-size: 28px;
 }
 
 
