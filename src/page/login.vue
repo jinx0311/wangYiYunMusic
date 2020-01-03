@@ -46,14 +46,14 @@
   import weibo from '../assets/login/微博.png'
   import qq from '../assets/login/qq.png'
   import wy from '../assets/login/网易支付-01.png'
-
+  import { Toast } from 'vant';
   export default {
     name: "login",
     data(){
       return{
         radio:false,
-        phone:'',
-        password:'',
+        phone:'15129398890',
+        password:'wyy10086',
         button_list:[
           {
             img:wechat
@@ -78,7 +78,13 @@
           password:this.password
         }).then(res=>{
           console.log(res)
+          if(res.code == '200'){
+              this.$router.push('/')
+          }else{
+              console.log(this)
+              Toast(res.msg);
 
+          }
         })
       },
       test(){
