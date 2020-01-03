@@ -10,7 +10,7 @@
       <van-popup class="popupBg" v-model="popup" position="left">
         <p style="font-size: 0.1rem;margin: 0 2.5%;text-align: center">登陆网易云音乐</p>
         <p style="font-size: 0.1rem;margin: 0 2.5%;text-align: center">手机电脑多端同步，尽享海量高品质音乐</p>
-        <van-button class="log_button" round center type="info">立即登录</van-button>
+        <van-button class="log_button" round center type="info" @click="toLogin">立即登录</van-button>
         <van-row class="myList">
           <van-col span="6">
             <van-icon name="envelop-o" size="1rem" color="rgb(255,70,56)" />
@@ -32,7 +32,7 @@
         <ul class="popup_ul1">
           <li class="popup_list1" v-for="item in popup_list1">
             <div>
-              <van-icon :name="item.icon" size="1rem" />
+              <van-icon :name="item.icon" size=".6rem" />
               <span>{{item.title}}</span>
             </div>
             <div style="width:40%;display: flex;justify-content: space-between">
@@ -183,6 +183,9 @@
     },
     showPopup() {
       this.popup = true;
+    },
+    toLogin() {
+      this.$router.push('/login')
     }
   }
 }
@@ -223,7 +226,7 @@
   }
   .listInfo{
     width: 61%;
-    font-size: 0.5rem !important;
+    font-size: 0.3rem !important;
     display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -236,11 +239,12 @@
     align-items: center;
     margin: 20px 0;
     padding: 0 2.5%;
+    font-size:0.5rem;
     justify-content: space-between;
   }
   .popup_list1 span{
     margin-left: 5px;
-    font-size: 0.96rem;
+    font-size: 0.4rem;
   }
   .myList .van-col{
     margin-top: 20px;

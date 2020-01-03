@@ -14,7 +14,7 @@ export default{
   'login':{
     'name':'登录',
     'type':'get',
-    'path':'/login'
+    'path':'/login/cellphone'
   },
   'getUserInfo':{
     'name':'获取用户信息',
