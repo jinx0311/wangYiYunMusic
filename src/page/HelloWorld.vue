@@ -245,6 +245,7 @@
   .popup_list1 span{
     margin-left: 5px;
     font-size: 0.4rem;
+    position:relative;
   }
   .myList .van-col{
     margin-top: 20px;
