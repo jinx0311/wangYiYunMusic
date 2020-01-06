@@ -8,9 +8,11 @@
         <van-col style="text-align: right;padding-top: 10px" span="4"><van-icon name="search" size=".6rem" /></van-col>
       </van-row>
       <van-popup class="popupBg" v-model="popup" position="left">
-        <p style="font-size: 0.1rem;margin: 0 2.5%;text-align: center">登陆网易云音乐</p>
-        <p style="font-size: 0.1rem;margin: 0 2.5%;text-align: center">手机电脑多端同步，尽享海量高品质音乐</p>
-        <van-button class="log_button" round center type="info" @click="toLogin">立即登录</van-button>
+       <div>
+         <p style="font-size: 0.1rem;margin: 0 2.5%;text-align: center">登陆网易云音乐</p>
+         <p style="font-size: 0.1rem;margin: 0 2.5%;text-align: center">手机电脑多端同步，尽享海量高品质音乐</p>
+         <van-button class="log_button" round center type="info" @click="toLogin">立即登录</van-button>
+       </div>
         <van-row class="myList">
           <van-col span="6">
             <van-icon name="envelop-o" size="1rem" color="rgb(255,70,56)" />
@@ -67,10 +69,14 @@
 
 <script>
   import axios from 'axios'
+  import {mapMutations,mapState} from 'vuex'
+  import request from '../request'
+  import {Toast} from "vant";
   export default {
   name: 'HelloWorld',
   data () {
     return {
+      userId:this.$route.params.userId,
       popup_list1:[
         {
           icon:'point-gift-o',
@@ -186,9 +192,25 @@
     },
     toLogin() {
       this.$router.push('/login')
+    },
+    userInfo(userId){
+      request.ajax('getUserInfo',{
+        uid:this.userId
+      }).then(res=>{
+        console.log(123,res)
+      })
+    }
+  },
+    computed:{
+      ...mapState({
+        loginState:state=>state.loginState
+      })
+    },
+    mounted() {
+      console.log(111,this.userId)
+      this.userInfo(this.userId)
     }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

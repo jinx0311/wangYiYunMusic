@@ -16,9 +16,10 @@ export default{
     'type':'get',
     'path':'/login/cellphone'
   },
+
   'getUserInfo':{
-    'name':'获取用户信息',
-    'path':'/user/subcount'
+    'name':'获取用户详细信息',
+    'path':'/user/detail?uid='+data
   },
   'banner':{
     'name':'获取首页轮播图',

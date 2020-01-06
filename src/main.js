@@ -7,6 +7,10 @@
  import 'vant/lib/index.css';
  import axios from 'axios';
  import 'lib-flexible/flexible'
+import Vuex from 'vuex'
+import store from './store'
+
+Vue.use(Vuex)
 
 Vue.use(Vant);
 Vue.prototype.$ajax = axios;
@@ -17,6 +21,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

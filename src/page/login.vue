@@ -2,10 +2,6 @@
 <div class="login">
   <img src="../assets/logo.png" class="logo" alt="">
   <div class="form">
-<!--    <input type="text" v-model="phone">-->
-<!--    <input type="password" v-model="password">-->
-<!--    <button @click="login">登录</button>-->
-<!--    <button @click="test">测试</button>-->
     <van-cell-group style="    width: 80vw;
     margin-left: 10vw">
       <van-field
@@ -32,9 +28,10 @@
       <li disabled v-for="item in button_list"> <img :src="item.img" /> </li>
     </ul>
    <div class="agree">
-     <van-radio-group v-model="radio">
-       <van-radio checked-color="#dc2c1d" name="1" style="color: #ffffff" >同意《用户协议》《隐私政策》《儿童隐私政策》</van-radio>
-     </van-radio-group>
+
+
+       <van-checkbox v-model="radio" checked-color="#dc2c1d" name="1" style="color: #ffffff" ><span style="color: #fff">同意《用户协议》《隐私政策》《儿童隐私政策》</span></van-checkbox>
+
    </div>
   </div>
 </div>
@@ -47,6 +44,7 @@
   import qq from '../assets/login/qq.png'
   import wy from '../assets/login/网易支付-01.png'
   import { Toast } from 'vant';
+  import { mapState, mapMutations, mapActions } from 'vuex'
   export default {
     name: "login",
     data(){
@@ -54,6 +52,7 @@
         radio:false,
         phone:'15129398890',
         password:'wyy10086',
+        userId:'',
         button_list:[
           {
             img:wechat
@@ -72,6 +71,7 @@
       }
     },
     methods:{
+      //console.log("111",this.loginState)
       login(){
         request.ajax('login',{
           phone:this.phone,
@@ -79,7 +79,12 @@
         }).then(res=>{
           console.log(res)
           if(res.code == '200'){
-              this.$router.push('/')
+            this.$router.push({
+              name: '',
+              params: { userId: res.profile.userId }
+            })
+              this.Logo()
+              console.log(this.loginState)
           }else{
               console.log(this)
               Toast(res.msg);
@@ -91,16 +96,36 @@
         request.ajax('getUserInfo').then(res=>{
           console.log(res)
         })
-      }
+      },
+
+      ...mapMutations({
+        Logo: 'Logo'
+      }),
+    },
+    mounted() {
+      console.log(this.loginState)
+
+    },
+    computed:{
+      ...mapState({
+        loginState:state=>state.loginState,
+      })
     }
   }
 </script>
 
 <style scoped>
-  .van-radio__icon{
-    border: 2px solid #fff;
-    border-radius: 50%;
-    height: .5rem;
+
+  .van-icon{
+    display: block;
+    box-sizing: border-box;
+    width: 1em;
+    height: 1em;
+    color: transparent;
+    font-size: .8em;
+    line-height: inherit;
+    text-align: center;
+    border: 1px solid #fff;
   }
 
   .van-cell-group{
