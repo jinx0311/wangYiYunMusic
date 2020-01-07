@@ -19,7 +19,7 @@ export default{
 
   'getUserInfo':{
     'name':'获取用户详细信息',
-    'path':'/user/detail?uid='+data
+    'path':'/user/detail'
   },
   'banner':{
     'name':'获取首页轮播图',

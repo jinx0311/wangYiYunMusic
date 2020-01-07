@@ -79,11 +79,10 @@
         }).then(res=>{
           console.log(res)
           if(res.code == '200'){
-            this.$router.push({
-              name: '',
-              params: { userId: res.profile.userId }
-            })
+            this.$router.push('/')
               this.Logo()
+              let id = res.profile.userId
+              this.getUserId(id)
               console.log(this.loginState)
           }else{
               console.log(this)
@@ -98,9 +97,7 @@
         })
       },
 
-      ...mapMutations({
-        Logo: 'Logo'
-      }),
+      ...mapMutations(['Logo','getUserId']),
     },
     mounted() {
       console.log(this.loginState)

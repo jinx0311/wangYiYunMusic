@@ -8,7 +8,13 @@
         <van-col style="text-align: right;padding-top: 10px" span="4"><van-icon name="search" size=".6rem" /></van-col>
       </van-row>
       <van-popup class="popupBg" v-model="popup" position="left">
-       <div>
+        <div v-if="loginState">
+          <p>这是用户信息</p>
+          <img :src="getUserInfo.avatar" alt="">
+          <p>{{getUserInfo.nikeName}}</p>
+          <p>{{getUserInfo.level}}</p>
+        </div>
+       <div v-if="!loginState">
          <p style="font-size: 0.1rem;margin: 0 2.5%;text-align: center">登陆网易云音乐</p>
          <p style="font-size: 0.1rem;margin: 0 2.5%;text-align: center">手机电脑多端同步，尽享海量高品质音乐</p>
          <van-button class="log_button" round center type="info" @click="toLogin">立即登录</van-button>
@@ -76,7 +82,11 @@
   name: 'HelloWorld',
   data () {
     return {
-      userId:this.$route.params.userId,
+      getUserInfo:{
+        level:this.level,
+        avatar:this.avatar,
+        nikeName:this.nikeName
+      },
       popup_list1:[
         {
           icon:'point-gift-o',
@@ -197,20 +207,26 @@
       request.ajax('getUserInfo',{
         uid:this.userId
       }).then(res=>{
-        console.log(123,res)
+        console.log(222,res)
+        this.saveUserInfo(res)
       })
-    }
+    },
+    ...mapMutations(['saveUserInfo'])
   },
     computed:{
       ...mapState({
-        loginState:state=>state.loginState
+        loginState:state=>state.loginState,
+        userId:state=>state.accountUid,
+        level:state=>state.level,
+        nikeName:state=>state.nikeName
       })
     },
     mounted() {
-      console.log(111,this.userId)
-      this.userInfo(this.userId)
+      console.log(this.getUserInfo)
+      this.userInfo()
     }
   }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
