@@ -111,7 +111,7 @@
         {
           icon:'music-o',
           title:'口袋彩铃'
-        },
+        }
       ],
       popup_list2:[
         {
