@@ -84,8 +84,9 @@
     /*border-radius 10Px*/
     font-size 20Px/*no*/
     overflow hidden
-  
+
   }
+
   .logo{
     height: 80%;
   }
