@@ -1,5 +1,16 @@
 <template>
   <div class="songList-wrap">
+    <div class="info-wrap">
+      <div class="info-wrap-top">
+        <div class="info-left">
+          <img class="img-cover" :src="songListInfo.coverImgUrl" alt="">
+        </div>
+        <div class="info-right">
+          <div class="title">{{songListInfo.name}}</div>
+        </div>
+      </div>
+      <div class="info-wrap-bottom"></div>
+    </div>
     <ul class="songList-ul" v-if="songListInfo">
       <li :class="['songList-li',playingSongInfo.id==item.id?'active':'']" @click="playMusic(item)" v-for="(item,index) in songListInfo.tracks" :key="index">
         <div class="li-left">{{index+1}}</div>
@@ -55,6 +66,28 @@
 
 <style lang="stylus">
 .songList-wrap
+  .info-wrap
+    padding 0 0.5rem
+    .info-wrap-top
+      height 4rem
+      .info-left
+        float: left
+        width 3rem
+        height 4rem
+        .img-cover
+          width 3rem
+          height 3rem
+      .info-right
+        float: left
+        width 6rem
+        height 4rem
+        .title
+          color #333333
+          font-size 16Px
+          font-weight bold
+          padding-left:0.5rem
+    .info-wrap-bottom
+      width 100%
   .songList-ul
     .songList-li
       height 100px
