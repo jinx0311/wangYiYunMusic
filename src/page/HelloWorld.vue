@@ -8,11 +8,9 @@
         <van-col style="text-align: right;padding-top: 10px" span="4"><van-icon name="search" size=".6rem" /></van-col>
       </van-row>
       <van-popup class="popupBg" v-model="popup" position="left">
-        <div v-if="userInfo">
-          <p>这是用户信息</p>
+        <div class="userInfo" v-if="userInfo">
           <img width="100" height="100" :src="userInfo.profile.avatarUrl" alt="">
           <p>{{userInfo.profile.nickname}}</p>
-          <p>{{userInfo.level}}</p>
         </div>
        <div v-if="!loginInfo">
          <p style="font-size: 0.1rem;margin: 0 2.5%;text-align: center">登陆网易云音乐</p>
@@ -64,6 +62,7 @@
           </li>
         </ul>
         <div class="pup_bottom">
+
           <van-button color="rgb(0,0,0,0)"><van-icon name="closed-eye" size="1.2rem" /><span>夜间模式</span></van-button>
           <van-button color="rgb(0,0,0,0)"><van-icon name="setting-o" size="1.2rem" /><span>设置</span></van-button>
           <van-button color="rgb(0,0,0,0)"><van-icon name="close" size="1.2rem" /><span>退出</span></van-button>
@@ -199,7 +198,9 @@
       this.$router.push('/login')
     },
     getUser(){
-      this.getUserInfo({id:this.loginInfo.account.id}).then(res => {
+      this.getUserInfo({
+        id:this.loginInfo.account.id
+      }).then(res => {
 
       })
     },
@@ -224,6 +225,22 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
+  .userInfo{
+    margin 0 2.5%
+    padding 0 2.5%
+    display flex
+    flex-direction row
+    align-items center
+  }
+    .userInfo{
+      font-weight 600
+    }
+  .userInfo img{
+    margin-right .3rem
+    width 1.5rem
+    height 1.5rem
+    border-radius 50%
+  }
   .topList{
     width: 54%;
     display: flex;
@@ -237,6 +254,7 @@
   .pup_bottom{
     position: absolute;
     bottom: 0;
+    border 1px solid black
     width: 100%;
     background: #ffffff;
     display: flex;

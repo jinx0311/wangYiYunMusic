@@ -11,11 +11,14 @@
         </ul>
       </div>
       <ul>
-        <li v-for="item in contentList">
+        <li class="myMusicList" v-for="item in contentList">
           <img :src="item.icon" alt="">
           <span>{{item.title}}</span>
         </li>
       </ul>
+      <div>
+        <p class="playMore"><span>最近播放</span><span>更多<van-icon name="arrow" /></span></p>
+      </div>
     </div>
 </template>
 
@@ -30,6 +33,12 @@
     import sport from '@/assets/跑步.png'
     import cai from '@/assets/猜歌名.png'
     import music from '@/assets/音乐.png'
+    import dowload from '@/assets/下载.png'
+    import shou from '@/assets/收藏.png'
+    import newSong from '@/assets/新品.png'
+    import viedoTwo from '@/assets/电台2.png'
+    import axios from 'axios'
+    import {mapMutations,mapState,mapActions} from 'vuex'
     export default {
         name: "My",
         data(){
@@ -92,15 +101,55 @@
               contentList:[
                 {
                   icon:music,
-                  title:"我的音乐"
-                }
+                  title:"本地音乐"
+                },
+                {
+                  icon:dowload,
+                  title:"下载管理"
+                },
+                {
+                  icon:viedoTwo,
+                  title:"我的电台"
+                },
+                {
+                  icon:shou,
+                  title:"我的收藏"
+                },
+                {
+                  icon:newSong,
+                  title:"关注新歌"
+                },
               ]
             }
-        }
+        },
+      mounted() {
+          this.getUserSongList()
+      },
+      methods:{
+          ...mapActions(["getUserSongList"])
+      }
     }
 </script>
 
 <style scoped>
+  .playMore{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5%;
+  }
+  .myMusicList img{
+    width: .7px;
+    height: .7rem;
+    margin-right: .3rem;
+  }
+  .myMusicList{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px 5%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
   .top_imgBg{
     height: 1.2rem;
     width: 1.2rem;

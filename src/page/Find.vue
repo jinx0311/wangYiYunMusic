@@ -89,6 +89,7 @@
     overflow hidden
 
   }
+
   .logo{
     height: 80%;
   }
