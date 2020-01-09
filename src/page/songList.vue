@@ -1,13 +1,20 @@
 <template>
   <div class="songList-wrap">
     <ul class="songList-ul" v-if="songListInfo">
-      <li :class="['songList-li',playingSongInfo.id==item.id?'active':'']" @click="playMusic(item)" v-for="(item,index) in songListInfo.tracks" :key="index">{{item.name}}</li>
+      <li :class="['songList-li',playingSongInfo.id==item.id?'active':'']" @click="playMusic(item)" v-for="(item,index) in songListInfo.tracks" :key="index">
+        <div class="li-left">{{index+1}}</div>
+        <div class="li-middle">
+          <span class="song">{{item.name}}</span><br /><span class="songer">{{item.ar[0].name}}</span>
+        </div>
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
+  import Request from '../request'
   import {mapState,mapActions} from 'vuex'
+  import { Toast } from 'vant';
   export default {
     name: "songList",
     computed:{
@@ -19,13 +26,29 @@
     methods:{
       ...mapActions(['getSongList','getSongInfo']),
       playMusic(item){
-        this.getSongInfo({id:item.id})
+        Request.ajax('checkSong',{id:item.id}).then(res => {
+          if(res && res.success){
+            this.getSongInfo({id:item.id}).then( res => {
+              console.log(res)
+              if(res.data[0].url == null){
+                Toast('暂无此歌曲播放信息，请选择其他歌曲~')
+              }
+            })
+          }else{
+            Toast(res.message)
+          }
+        })
+
+      },
+      getUser(){
+        Request.ajax('subcount').then(res => {
+          console.log(res)
+        })
       }
     },
     mounted(){
-      console.log(this.$route)
       this.getSongList({id:this.$route.params.songListId})
-      console.log(this.songListInfo)
+      this.getUser()
     }
   }
 </script>
@@ -34,9 +57,30 @@
 .songList-wrap
   .songList-ul
     .songList-li
-      line-height 80px
+      height 100px
       padding-left 40px
       &.active
         color #f36
         background #eee
+        .li-left
+          color #f36
+        .li-middle
+          .song
+            color #f36
+      .li-left
+        float: left
+        width:60px;
+        font-size 16Px
+        color #555
+        line-height 100px
+      .li-middle
+        padding-top 13px
+        float: left
+        color #333
+        font-size 14Px
+        .song
+          line-height 30px
+        .songer
+          color #666
+          font-size 12Px
 </style>

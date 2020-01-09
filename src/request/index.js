@@ -3,7 +3,7 @@ import api from './api'
 import config from './config'
 
 const host = 'https://www.xuweijin.com/wyyApi'
-
+axios.defaults.withCredentials = true
 const request = {
   ajax:(serverName,data) => {
     const serverData = api[serverName]
@@ -11,17 +11,13 @@ const request = {
     if(!serverData.type || serverData.type=='get'){
       return axios.get(url,{
         params:data
-      },{
-        withCredentials: true
       }).then(res => {
          return res.data
       }).catch(error => {
         return error
       })
     }else{
-      return axios.post(url,data,{
-        withCredentials: true
-      }).then(res => {
+      return axios.post(url,data).then(res => {
         return res.data
       }).catch(error => {
         return error

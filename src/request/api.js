@@ -212,5 +212,13 @@ export default {
   'getSongDetail': {
     'name':'获取歌曲信息',
     'path':'/song/url'
+  },
+  'checkSong':{
+    'name':'判断歌曲是否可播放',
+    'path':'/check/music'
+  },
+  'subcount':{
+    'name':'判断歌曲是否可播放',
+    'path':'/user/subcount'
   }
 }

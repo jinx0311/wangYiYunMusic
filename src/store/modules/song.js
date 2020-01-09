@@ -28,7 +28,9 @@ export default {
         id : payload.id
       }).then(res => {
         if(res && res.code == '200'){
-          commit('updateSongInfo',res.data[0])
+          if(res.data[0].url){
+            commit('updateSongInfo',res.data[0])
+          }
         }
         return res
       })
