@@ -6,6 +6,7 @@ import find from '@/page/Find'
 import My from '@/page/My'
 import YunCun from '@/page/YunCun'
 import MyVideo from '@/page/MyVideo'
+import songList from '@/page/songList'
 import login from '@/page/login'
 Vue.use(Router)
 
@@ -43,6 +44,10 @@ export default new Router({
               component:YunCun
             }
           ]
+        },{
+          path:'songList/:songListId',
+          name:'songList',
+          component:songList
         },{
           path:'login',
           name:login,
