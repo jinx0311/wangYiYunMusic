@@ -7,6 +7,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import userInfo from './modules/userInfo'
+import song from './modules/song'
 // import getters from './getters'
 // import actions from './actions'
 
@@ -14,7 +15,8 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   modules:{
-    userInfo
+    userInfo,
+    song
   }
 })
 

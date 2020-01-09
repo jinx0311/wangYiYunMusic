@@ -20,7 +20,7 @@
       </div>
       <div class="song-menu-content">
         <van-row justify="space-around" gutter="5">
-          <van-col span="8" v-for="(item,index) in songList" :key="index">
+          <van-col span="8" v-for="(item,index) in songList" :key="index" @click="enterSongList(item)">
             <div class="img-wrap" :style="{backgroundImage: 'url('+item.picUrl+')'}"></div>
             <div class="text-div van-multi-ellipsis--l2">{{item.name}}</div>
           </van-col>
@@ -59,6 +59,9 @@
             console.log(error);
           });
       },
+      enterSongList(params){
+        this.$router.push('/songList/'+params.id)
+      },
       getRecommendSongList(){
         request.ajax('getRecommendSongList',{
           limit:6
@@ -84,7 +87,7 @@
     /*border-radius 10Px*/
     font-size 20Px/*no*/
     overflow hidden
-  
+
   }
   .logo{
     height: 80%;

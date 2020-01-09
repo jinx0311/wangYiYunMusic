@@ -1,7 +1,7 @@
 <template>
   <div class="player-wrap">
     <audio
-      src="http://m7.music.126.net/20200109121335/98058b9a2c676ecef174919f47591524/ymusic/0fd6/4f65/43ed/a8772889f38dfcb91c04da915b301617.mp3"
+      :src="playingSongInfo.url"
       ref="audio"
       autoplay
       controls
@@ -10,8 +10,14 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
   export default {
-    name: "player"
+    name: "player",
+    computed:{
+      ...mapState({
+        playingSongInfo:state => state.song.playingSongInfo
+      })
+    }
   }
 </script>
 
