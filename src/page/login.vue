@@ -24,6 +24,7 @@
       />
     </van-cell-group>
     <van-button plain type="primary"  class="login_button" @click="login">手机号登陆</van-button>
+    <van-button plain type="primary"  class="login_button" @click="test">点击数字加1，当前为{{testCount}}</van-button>
     <ul class="button_list">
       <li disabled v-for="item in button_list"> <img :src="item.img" /> </li>
     </ul>
@@ -72,8 +73,24 @@
     },
     methods:{
       //console.log("111",this.loginState)
+      ...mapActions(['userLogin']),
+      ...mapMutations(['updateTestCount']),
       login(){
-        request.ajax('login',{
+        this.userLogin({
+          phone:this.phone,
+          password:this.password
+        }).then(res => {
+          console.log(res)
+          if(res.code == '200'){
+            this.$router.push('/')
+            this.Logo()
+            let id = res.profile.userId
+            this.getUserId(id)
+          }else{
+            Toast(res.msg);
+          }
+        })
+        /*request.ajax('login',{
           phone:this.phone,
           password:this.password
         }).then(res=>{
@@ -89,15 +106,11 @@
               Toast(res.msg);
 
           }
-        })
+        })*/
       },
       test(){
-        request.ajax('getUserInfo').then(res=>{
-          console.log(res)
-        })
+        this.updateTestCount({})
       },
-
-      ...mapMutations(['Logo','getUserId']),
     },
     mounted() {
       console.log(this.loginState)
@@ -106,6 +119,7 @@
     computed:{
       ...mapState({
         loginState:state=>state.loginState,
+        testCount: state =>  state.userInfo.testCount
       })
     }
   }
