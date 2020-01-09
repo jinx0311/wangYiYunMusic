@@ -1,13 +1,18 @@
 <template>
   <div class="layout-wrap">
     <router-view />
+    <player></player>
   </div>
 
 </template>
 
 <script>
+  import player from '../components/player'
   export default {
-    name: "layout"
+    name: "layout",
+    components:{
+      player
+    }
   }
 </script>
 

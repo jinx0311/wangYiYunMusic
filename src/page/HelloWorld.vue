@@ -162,7 +162,7 @@
 
       ],
       topLiId:1,
-      popup:true,
+      popup:false,
       list:[
         {
           icon:'video-o',
