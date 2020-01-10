@@ -12,7 +12,7 @@
       <div class="info-wrap-bottom"></div>
     </div>
     <ul class="songList-ul" v-if="songListInfo">
-      <li :class="['songList-li',playingSongInfo.id==item.id?'active':'']" @click="playMusic(item)" v-for="(item,index) in songListInfo.tracks" :key="index">
+      <li :class="['songList-li',playingSongUrl?(playingSongUrl.id==item.id?'active':''):'']" @click="playMusic(item)" v-for="(item,index) in songListInfo.tracks" :key="index">
         <div class="li-left">{{index+1}}</div>
         <div class="li-middle">
           <span class="song">{{item.name}}</span><br /><span class="songer">{{item.ar[0].name}}</span>
@@ -31,19 +31,25 @@
     computed:{
       ...mapState({
         songListInfo:state => state.song.songListInfo,
-        playingSongInfo:state => state.song.playingSongInfo
+        playingSongInfo:state => state.song.playingSongInfo,
+        playingSongUrl:state => state.song.playingSongUrl
       })
     },
     methods:{
-      ...mapActions(['getSongList','getSongInfo']),
+      ...mapActions(['getSongList','getSongInfo','getSongUrl']),
       playMusic(item){
         Request.ajax('checkSong',{id:item.id}).then(res => {
           if(res && res.success){
-            this.getSongInfo({id:item.id}).then( res => {
+            this.getSongUrl({id:item.id}).then( res => {
               console.log(res)
               if(res.data[0].url == null){
                 Toast('暂无此歌曲播放信息，请选择其他歌曲~')
               }
+            })
+            this.getSongInfo({id:item.id}).then( res => {
+              /*if(res.data[0].url == null){
+                Toast('暂无此歌曲播放信息，请选择其他歌曲~')
+              }*/
             })
           }else{
             Toast(res.message)
@@ -59,7 +65,7 @@
     },
     mounted(){
       this.getSongList({id:this.$route.params.songListId})
-      this.getUser()
+      //this.getUser()
     }
   }
 </script>

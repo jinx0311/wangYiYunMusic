@@ -37,8 +37,8 @@ export default {
     'name':'获取歌单列表',
     'path':'/playlist/detail'
   },
-  'getSongDetail': {
-    'name':'获取歌曲信息',
+  'getSongUrl': {
+    'name':'获取歌曲url',
     'path':'/song/url'
   },
   'checkSong':{
@@ -48,5 +48,9 @@ export default {
   'subcount':{
     'name':'判断歌曲是否可播放',
     'path':'/user/subcount'
-  }
+  },
+  'getSongDetail':{
+    'name':'获取歌曲详情',
+    'path':'/song/detail'
+  },
 }
