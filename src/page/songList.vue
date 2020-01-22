@@ -24,7 +24,7 @@
 
 <script>
   import Request from '../request'
-  import {mapState,mapActions} from 'vuex'
+  import {mapState,mapActions,mapMutations} from 'vuex'
   import { Toast } from 'vant';
   export default {
     name: "songList",
@@ -35,8 +35,14 @@
         playingSongUrl:state => state.song.playingSongUrl
       })
     },
+    data(){
+      return{
+        hasAdd:false,  //已经添加到播放列表了
+      }
+    },
     methods:{
       ...mapActions(['getSongList','getSongInfo','getSongUrl']),
+      ...mapMutations(['updatePlayingSongListInfo']),
       playMusic(item){
         Request.ajax('checkSong',{id:item.id}).then(res => {
           if(res && res.success){
@@ -47,9 +53,9 @@
               }
             })
             this.getSongInfo({id:item.id}).then( res => {
-              /*if(res.data[0].url == null){
-                Toast('暂无此歌曲播放信息，请选择其他歌曲~')
-              }*/
+              if(!this.hasAdd){
+                this.updatePlayingSongListInfo(this.songListInfo.tracks)
+              }
             })
           }else{
             Toast(res.message)
@@ -98,6 +104,8 @@
     .songList-li
       height 100px
       padding-left 40px
+      overflow hidden
+      display flex
       &.active
         color #f36
         background #eee
@@ -113,6 +121,10 @@
         color #555
         line-height 100px
       .li-middle
+        flex 1
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         padding-top 13px
         float: left
         color #333

@@ -4,6 +4,7 @@ export default {
     songListInfo:'',  //歌单信息，包含歌曲列表和歌单信息
     playingSongUrl:'',
     playingSongDetail:'',
+    playingSongListInfo:'',  //播放列表
   },
   mutations:{
     updateSongList(state,payload){
@@ -14,7 +15,10 @@ export default {
     },
     updateSongInfo(state,payload){
       state.playingSongInfo = payload
-    }
+    },
+    updatePlayingSongListInfo(state,payload){
+      state.playingSongListInfo = payload
+    },
   },
   actions:{
     getSongList({state,commit},payload){

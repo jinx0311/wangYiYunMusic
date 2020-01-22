@@ -51,8 +51,8 @@
     data(){
       return{
         radio:false,
-        phone:'15129398890',
-        password:'wyy10086',
+        phone:'',
+        password:'',
         userId:'',
         button_list:[
           {

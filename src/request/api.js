@@ -53,4 +53,12 @@ export default {
     'name':'获取歌曲详情',
     'path':'/song/detail'
   },
+  'getSongListList':{
+    'name':'获取歌单列表',
+    'path':'/top/playlist'
+  },
+  'getHighqualitySongListList':{
+    'name':'获取精品歌单列表',
+    'path':'/top/playlist/highquality'
+  },
 }

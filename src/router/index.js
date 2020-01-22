@@ -5,6 +5,7 @@ import layout from '@/components/layout'
 import find from '@/page/Find'
 import My from '@/page/My'
 import YunCun from '@/page/YunCun'
+import songListBackground from '@/page/songListBackground'
 import MyVideo from '@/page/MyVideo'
 import songList from '@/page/songList'
 import login from '@/page/login'
@@ -42,6 +43,10 @@ export default new Router({
               path:'yuncun',
               name:YunCun,
               component:YunCun
+            },{
+              path:'songListBackground',
+              name:songListBackground,
+              component:songListBackground
             }
           ]
         },{

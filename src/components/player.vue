@@ -1,11 +1,14 @@
 <template>
-  <div :class="['player-wrap',showFull?'showFull':'']">
+  <div :class="['player-wrap',showFull?'showFull':'']" >
     <div class="full-wrap" v-if="showFull">
       <div class="title">
         <span class="close" @click="checkFull">关闭</span><span>{{playingSongInfo.name}}</span>
       </div>
       <div class="song-img-wrap">
         <img class="song-img" :src="playingSongInfo.al.picUrl" alt="">
+      </div>
+      <div>
+        <span @click="toPinglun">评论</span>
       </div>
       <div class="control-wrap">
         <span @click="preSong">上一首</span> <span @click="playAudio">{{playStatus?'播放':'暂停'}}</span> <span @click="nextSong">下一首</span>
@@ -19,8 +22,8 @@
       position="bottom"
       :style="{ maxHeight: '50%' }"
     >
-      <ul class="songList-ul" v-if="songListInfo">
-        <li :class="['songList-li',playingSongUrl?(playingSongUrl.id==item.id?'active':''):'']" @click="playMusic(item)" v-for="(item,index) in songListInfo.tracks" :key="index">
+      <ul class="songList-ul" v-if="playingSongListInfo">
+        <li :class="['songList-li',playingSongUrl?(playingSongUrl.id==item.id?'active':''):'']" @click="playMusic(item)" v-for="(item,index) in playingSongListInfo" :key="index">
           <div class="li-left">{{index+1}}</div>
           <div class="li-middle">
             <span class="song">{{item.name}}</span><span class="songer">{{item.ar[0].name}}</span>
@@ -49,18 +52,21 @@
         playingSongInfo:state => state.song.playingSongInfo,
         playingSongUrl:state => state.song.playingSongUrl,
         songListInfo:state => state.song.songListInfo,
+        playingSongListInfo:state => state.song.playingSongListInfo,
       }),
     },
     watch:{
       playingSongUrl(params){
-        console.log('1111')
-
         if(this.playingSongUrl && this.playingSongUrl.url) {
           this.playStatus = false
           const audio = document.getElementById('audioPlay');
-          audio.addEventListener('ended',  () => {
-            this.preSong()
-          }, false);
+          console.log(audio)
+          setTimeout(() => {
+            audio.addEventListener('ended',  () => {
+              this.nextSong()
+            }, false);
+          },500)
+
         }
       },
     },
@@ -75,6 +81,10 @@
       ...mapActions(['getSongList','getSongInfo','getSongUrl']),
       checkFull(){
         this.showFull = !this.showFull
+      },
+      toPinglun(){
+        this.showFull = false
+        this.$router.push('/')
       },
       playAudio(){
         const audio = document.getElementById('audioPlay');

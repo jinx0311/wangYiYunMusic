@@ -8,7 +8,7 @@
     <div class="nav-list">
       <van-row type="flex" justify="space-around">
         <van-col span="4"><div><div class="img-wrap"></div>每日推荐</div></van-col>
-        <van-col span="4"><div><div class="img-wrap"></div>歌单</div></van-col>
+        <van-col span="4"><div @click="enterSongListBackground"><div class="img-wrap"></div>歌单</div></van-col>
         <van-col span="4"><div><div class="img-wrap"></div>排行榜</div></van-col>
         <van-col span="4"><div><div class="img-wrap"></div>电台</div></van-col>
         <van-col span="4"><div><div class="img-wrap"></div>直播</div></van-col>
@@ -16,7 +16,7 @@
     </div>
     <div class="song-menu-wrap">
       <div class="song-menu-title">
-        推荐歌单 <span class="song-menu-ground">歌单广场</span>
+        推荐歌单 <span class="song-menu-ground"  @click="enterSongListBackground">歌单广场</span>
       </div>
       <div class="song-menu-content">
         <van-row justify="space-around" gutter="5">
@@ -61,6 +61,9 @@
       },
       enterSongList(params){
         this.$router.push('/songList/'+params.id)
+      },
+      enterSongListBackground(){
+        this.$router.push('/helloworld/songListBackground')
       },
       getRecommendSongList(){
         request.ajax('getRecommendSongList',{
