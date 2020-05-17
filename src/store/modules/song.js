@@ -5,8 +5,12 @@ export default {
     playingSongUrl:'',
     playingSongDetail:'',
     playingSongListInfo:'',  //播放列表
+    songDetails:'' //歌曲详情
   },
   mutations:{
+    updateSongDetails(state,payload){
+      state.songDetails= payload
+    },//歌曲详情
     updateSongList(state,payload){
       state.songListInfo = payload
     },
@@ -21,6 +25,17 @@ export default {
     },
   },
   actions:{
+    getSongName({state,commit},payload){
+      return Request.ajax('getSongDetail',{
+        ids:payload
+      }).then(res => {
+        if(res&& res.code == '200'){
+          console.log(res)
+          commit('updateSongDetails',res)
+        }
+        return res
+      })
+    },
     getSongList({state,commit},payload){
       return Request.ajax('getSongList',{
         id : payload.id

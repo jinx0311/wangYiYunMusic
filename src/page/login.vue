@@ -1,6 +1,10 @@
 <template>
 <div class="login">
   <img src="../assets/logo.png" class="logo" alt="">
+  <div>
+    {{testCount}}
+    <button @click="test">加1</button>    
+  </div>
   <div class="form">
     <van-cell-group style="    width: 80vw;
     margin-left: 10vw">
@@ -23,8 +27,8 @@
         required
       />
     </van-cell-group>
-    <van-button plain type="primary"  class="login_button" @click="login">手机号登陆</van-button>
-    <van-button plain type="primary"  class="login_button" @click="test">点击数字加1，当前为{{testCount}}</van-button>
+    <van-button plain type="primary" :disabled="!radio" class="login_button" @click="login">手机号登陆</van-button>
+    
     <ul class="button_list">
       <li disabled v-for="item in button_list"> <img :src="item.img" /> </li>
     </ul>
@@ -74,7 +78,7 @@
     methods:{
       //console.log("111",this.loginState)
       ...mapActions(['userLogin']),
-      ...mapMutations(['updateTestCount']),
+      ...mapMutations(['updateTestCount','getUserId']),
       login(){
         this.userLogin({
           phone:this.phone,
@@ -87,7 +91,8 @@
             let id = res.profile.userId
             this.getUserId(id)
           }else{
-            Toast(res.msg);
+            Toast(res.msg||'请填写正确的用户名和密码');
+            
           }
         })
         /*request.ajax('login',{
@@ -109,7 +114,8 @@
         })*/
       },
       test(){
-        this.updateTestCount({})
+        let params = {name:'abc'}
+        this.updateTestCount({num:5})
       },
     },
     mounted() {
@@ -126,7 +132,10 @@
 </script>
 
 <style scoped>
-
+  .van-checkbox__icon,.van-checkbox__icon--round,.van-icon-success{
+    position: relative;
+    bottom: 1px;
+  }
   .van-icon{
     display: block;
     box-sizing: border-box;
@@ -179,12 +188,16 @@
     border: 0.026667rem solid rgba(255,255,255,0.8);
     border-radius: 50%;
   }
+  .van-checkbox{
+    overflow: visible;
+  }
   .login_button{
     width: 60vw;
     height: 1rem;
     margin: 1rem auto;
     border-radius: 0.32rem;
     margin-left: 20vw;
+    border: none;
     color: #dd2e1d;
   }
   .form{

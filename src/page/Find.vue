@@ -49,7 +49,6 @@
     },
     methods:{
       getList(){
-          console.log("banner")
         let that=this
           request.ajax('banner')
           .then(function (response) {

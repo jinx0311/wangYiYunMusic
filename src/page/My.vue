@@ -17,7 +17,12 @@
         </li>
       </ul>
       <div>
-        <p class="playMore"><span>最近播放</span><span>更多<van-icon name="arrow" /></span></p>
+        <p @click="toRecentlyPlayed" class="playMore"><span>最近播放</span><span>更多<van-icon name="arrow" /></span></p>
+        <ul>
+          <li v-for='item in recentlyPlayed'>
+
+          </li>
+        </ul>
       </div>
     </div>
 </template>
@@ -37,12 +42,14 @@
     import shou from '@/assets/收藏.png'
     import newSong from '@/assets/新品.png'
     import viedoTwo from '@/assets/电台2.png'
-    import axios from 'axios'
+    //import axios from 'axios'
+    import Request from '@/request'
     import {mapMutations,mapState,mapActions} from 'vuex'
     export default {
         name: "My",
         data(){
             return{
+                recentlyPlayed:[],//最近播放
                 topList:[
                     {
                         icon:dianyin,
@@ -126,7 +133,10 @@
           this.getUserSongList()
       },
       methods:{
-          ...mapActions(["getUserSongList"])
+          ...mapActions(["getUserSongList"]),
+          toRecentlyPlayed(){
+            this.$router.push({path:'/recentlyPlayed'})
+          }
       }
     }
 </script>

@@ -61,4 +61,8 @@ export default {
     'name':'获取精品歌单列表',
     'path':'/top/playlist/highquality'
   },
+  'getRecentlyPlayed':{
+    'name':'获取最近播放记录',
+    'path':'/user/record'
+  }
 }

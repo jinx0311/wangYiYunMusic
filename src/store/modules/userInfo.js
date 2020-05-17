@@ -3,6 +3,7 @@ export default {
   state:{
     loginInfo:'',
     userInfo:'',
+    userId:'',
     testCount:0,
   },
   mutations:{
@@ -13,7 +14,7 @@ export default {
       state.userInfo = payload.userInfo
     },
     updateTestCount(state,payload){
-      state.testCount = ++state.testCount
+      state.testCount = state.testCount+payload.num
     },
   },
   actions:{

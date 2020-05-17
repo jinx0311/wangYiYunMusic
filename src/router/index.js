@@ -8,7 +8,9 @@ import YunCun from '@/page/YunCun'
 import songListBackground from '@/page/songListBackground'
 import MyVideo from '@/page/MyVideo'
 import songList from '@/page/songList'
+import songDetails from '@/page/My/songDetails'
 import login from '@/page/login'
+import recentlyPlayed from '@/page/My/RecentlyPlayed'
 Vue.use(Router)
 
 export default new Router({
@@ -18,7 +20,11 @@ export default new Router({
       name: 'index',
       component: layout,
       redirect:'/helloworld/find',
-      children:[
+      children:[ {
+        path:'recentlyPlayed',//最近播放
+        name:recentlyPlayed,
+        component:recentlyPlayed,
+      },
         {
           path:'helloworld',
           name:HelloWorld,
@@ -34,6 +40,7 @@ export default new Router({
               name:My,
               component:My
             },
+           
             {
               path:'myvideo',
               name:MyVideo,
@@ -53,7 +60,13 @@ export default new Router({
           path:'songList/:songListId',
           name:'songList',
           component:songList
-        },{
+        },
+        {
+          path:'songDetails/:songId',
+          name:'songDetails',
+          component:songDetails
+        },
+        {
           path:'login',
           name:login,
           component:login

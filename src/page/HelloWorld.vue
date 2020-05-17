@@ -1,11 +1,11 @@
 <template>
   <div class="hello">
       <van-row class="nav">
-        <van-col style="text-align: left;padding-top: 10px" span="4" @click="showPopup"><van-icon name="orders-o" size=".6rem" /></van-col>
+        <van-col style="text-align: left;" span="4" @click="showPopup"><van-icon name="orders-o" size=".6rem" /></van-col>
         <ul class="topList">
           <li v-for="(item,index,key) in topList" :key="index" @click="handTpId(index)" :class='{active:index==topLiId}'  ><router-link :to="item.url">{{item.title}}</router-link></li>
         </ul>
-        <van-col style="text-align: right;padding-top: 10px" span="4"><van-icon name="search" size=".6rem" /></van-col>
+        <van-col style="text-align: right;" span="4"><van-icon name="search" size=".6rem" /></van-col>
       </van-row>
       <van-popup class="popupBg" v-model="popup" position="left">
         <div class="userInfo" v-if="userInfo">
@@ -19,19 +19,19 @@
        </div>
         <van-row class="myList">
           <van-col span="6">
-            <van-icon name="envelop-o" size="1rem" color="rgb(255,70,56)" />
+            <van-icon name="envelop-o" size=".8rem" color="rgb(255,70,56)" />
             <span>我的消息</span>
           </van-col>
           <van-col span="6">
-            <van-icon name="friends-o" size="1rem" color="rgb(255,70,56)"  />
+            <van-icon name="friends-o" size=".8rem" color="rgb(255,70,56)"  />
             <span>我的好友</span>
           </van-col>
           <van-col span="6">
-            <van-icon name="service-o" size="1rem" color="rgb(255,70,56)"  />
+            <van-icon name="service-o" size=".8rem" color="rgb(255,70,56)"  />
             <span>听歌识曲</span>
           </van-col>
           <van-col span="6">
-            <van-icon name="flower-o" size="1rem" color="rgb(255,70,56)"  />
+            <van-icon name="flower-o" size=".8rem" color="rgb(255,70,56)"  />
             <span>个性装扮</span>
           </van-col>
         </van-row>
@@ -56,16 +56,16 @@
         <ul class="popup_ul1">
           <li class="popup_list1" v-for="item in popup_list2">
             <div>
-              <van-icon :name="item.icon" size="1rem" />
+              <van-icon :name="item.icon" size="0.6rem" />
               <span>{{item.title}}</span>
             </div>
           </li>
         </ul>
         <div class="pup_bottom">
 
-          <van-button color="rgb(0,0,0,0)"><van-icon name="closed-eye" size="1.2rem" /><span>夜间模式</span></van-button>
-          <van-button color="rgb(0,0,0,0)"><van-icon name="setting-o" size="1.2rem" /><span>设置</span></van-button>
-          <van-button color="rgb(0,0,0,0)"><van-icon name="close" size="1.2rem" /><span>退出</span></van-button>
+          <van-button ><van-icon color="rgb(0,0,0)" name="closed-eye" size=".5rem" /><span>夜间模式</span></van-button>
+          <van-button><van-icon color="rgb(0,0,0)" name="setting-o" size=".5rem" /><span>设置</span></van-button>
+          <van-button><van-icon color="rgb(0,0,0)" name="close" size=".5rem" /><span>退出</span></van-button>
         </div>
       </van-popup>
       <router-view />
@@ -252,14 +252,24 @@
     background #fff
   }
   .pup_bottom{
-    position: absolute;
-    bottom: 0;
-    border 1px solid black
+    border-top 1px solid #dddddd
     width: 100%;
     background: #ffffff;
+    flex 1
+    height 1.5rem
+    color red
     display: flex;
     line-height: 1.2rem;
     justify-content: space-between;
+  }
+  .pup_bottom span{
+    color #000
+    margin-left .15rem
+    font-size .35rem
+  }
+  .pup_bottom .van-button{
+    border none !important
+    margin-top .15rem
   }
   .popupBg{
     padding: 0 0.25%;
@@ -270,16 +280,19 @@
     padding-top: 1.2rem;
   }
   .popup_ul1{
-    border-top: 1px solid rgba(255,255,255,0.6);
+    border-top: 1px solid rgba(200,200,200,0.6);
     margin: 0 2.5%;
+  }
+  .van-icon{
+    top:0.13rem;
   }
   .listInfo{
     width: 61%;
     font-size: 0.3rem !important;
     display: inline-block;
     overflow: hidden;
+    line-height 1.3rem;
     text-overflow: ellipsis;
-    line-height: 0.8rem;
     white-space: nowrap;
   }
   .popup_list1{
@@ -293,8 +306,12 @@
   }
   .popup_list1 span{
     margin-left: 5px;
-    font-size: 0.4rem;
+    line-height:1.3rem;
+    font-size: 0.35rem;
     position:relative;
+  }
+  .myList .van-icon{
+    margin-bottom 20px
   }
   .myList .van-col{
     margin-top: 20px;
@@ -308,9 +325,11 @@
     margin: 0 2.5%;
     padding-bottom: 20px;
   }
+
   .van-grid-item__text{
     color: #ffffff;
   }
+  
   .log_button{
     background-color: rgba(0,0,0,0);
     border: 0.02rem solid #bbb;
@@ -321,6 +340,9 @@
     width: 40%;
     margin: 0.3rem auto;
     margin-left: 30%;
+  }
+  .log_button span{
+    font-size .3rem
   }
 .van-overlay{
   background: red !important;
@@ -334,6 +356,7 @@
 .nav{
   background: #fff;
   color: #000;
+  margin-bottom .1rem
   display: flex;
   justify-content: space-between;
   align-items: center;
