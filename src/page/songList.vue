@@ -1,12 +1,27 @@
 <template>
   <div class="songList-wrap">
+    <div class="head">
+      <p @click='back'>
+        <van-icon size="20" name="arrow-left" /><span>歌单</span>
+      </p>
+      <p>
+        <van-icon size="20" name="search" style="margin-right:.5rem" />
+        <van-icon size="20" name="ellipsis" />
+      </p>
+    </div>
     <div class="info-wrap">
       <div class="info-wrap-top">
         <div class="info-left">
           <img class="img-cover" :src="songListInfo.coverImgUrl" alt="">
         </div>
         <div class="info-right">
-          <div class="title">{{songListInfo.name}}</div>
+          <div class="title">
+            <h5>{{songListInfo.name}}</h5>
+            <div class="userInfo">
+              <img :src='userimg'>
+               <p>{{userName}}&nbsp;<van-icon name="arrow" /></p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="info-wrap-bottom"></div>
@@ -38,7 +53,12 @@
     data(){
       return{
         hasAdd:false,  //已经添加到播放列表了
+        userName:'',
+        userimg:''
       }
+    },
+    updated(){
+      this.getUserInfo()
     },
     methods:{
       ...mapActions(['getSongList','getSongInfo','getSongUrl']),
@@ -61,7 +81,20 @@
             Toast(res.message)
           }
         })
-
+      },
+      getUserInfo(){ //获取歌单创建者信息
+        let that = this
+        Request.ajax('getUserInfo',{uid:this.songListInfo.userId}).then(res=>{
+          if(res&&res.code=='200'){
+            console.log(res)
+            that.userName=res.profile.nickname
+            that.userimg=res.profile.avatarUrl
+            console.log('哈哈',that.userimg)
+          }
+        })
+      },
+      back(){
+        this.$router.go(-1)
       },
       getUser(){
         Request.ajax('subcount').then(res => {
@@ -70,6 +103,7 @@
       }
     },
     mounted(){
+      this.getUserInfo()
       this.getSongList({id:this.$route.params.songListId})
       //this.getUser()
     }
@@ -77,22 +111,55 @@
 </script>
 
 <style lang="stylus">
+.userInfo{
+  display flex
+  flex-wrap nowrap
+  align-items center
+}
+.userInfo img{
+  width 1rem
+  height 1rem
+  border-radius 50%
+  margin-right .2rem
+}
+.userInfo p{
+  font-size .3rem
+}
+.head{
+  position: fixed;
+    top: 0;
+    background: #fff;
+    display: flex;
+    height:1.5rem;
+    box-sizing: border-box;
+    width: 100%;
+  display flex
+  align-items center
+  justify-content space-between
+  padding .5rem 5%
+  font-size .4rem
+}
+.head p{
+  margin 0
+  display flex
+  align-items center
+}
 .songList-wrap
   .info-wrap
+    margin-top 1.5rem
+    height 3rem
+    margin-bottom .1rem
     padding 0 0.5rem
     .info-wrap-top
-      height 4rem
       .info-left
         float: left
         width 3rem
-        height 4rem
         .img-cover
           width 3rem
           height 3rem
       .info-right
         float: left
         width 6rem
-        height 4rem
         .title
           color #333333
           font-size 16Px

@@ -2,9 +2,6 @@
  * api接口统一管理
  */
 import axios from 'axios'
-import {
-  bannerSwiper
-} from './config'
 //设置axios延迟时常
 axios.defaults.timeout = 30000
 // post请求头
@@ -28,6 +25,10 @@ export default {
   'getUserSongList': {
     'name': '获取用户歌单列表',
     'path': '/user/subcount'
+  },
+  'getUserestablishList':{
+    'name': '获取用户创建的歌单',
+    'path': '/user/playlist'
   },
   'getRecommendSongList':{
     name:'获取推荐歌单',
@@ -64,5 +65,17 @@ export default {
   'getRecentlyPlayed':{
     'name':'获取最近播放记录',
     'path':'/user/record'
+  },
+  'getPrivate':{
+    'name':'获取用户私信',
+    'path':'/msg/private'
+  },
+  'getcomment':{
+    'name':'获取用户收到的评论',
+    'path':'/msg/comments'
+  },
+  'getMentionMe':{
+    'name':'获取@我的消息',
+    'path':'/msg/forwards'
   }
 }

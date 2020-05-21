@@ -11,6 +11,7 @@ import songList from '@/page/songList'
 import songDetails from '@/page/My/songDetails'
 import login from '@/page/login'
 import recentlyPlayed from '@/page/My/RecentlyPlayed'
+import message from '@/page/message'
 Vue.use(Router)
 
 export default new Router({
@@ -24,6 +25,11 @@ export default new Router({
         path:'recentlyPlayed',//最近播放
         name:recentlyPlayed,
         component:recentlyPlayed,
+      },
+      {
+        path:'message',//我的消息
+        name:message,
+        component:message,
       },
         {
           path:'helloworld',

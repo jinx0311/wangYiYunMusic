@@ -5,9 +5,13 @@ export default {
     playingSongUrl:'',
     playingSongDetail:'',
     playingSongListInfo:'',  //播放列表
-    songDetails:'' //歌曲详情
+    songDetails:'', //歌曲详情
+    UserestablishList:'' //用户创建的歌单
   },
   mutations:{
+    undataUserestablishList(state,payload){ //用户创建的歌单
+      state.UserestablishList= payload
+    },
     updateSongDetails(state,payload){
       state.songDetails= payload
     },//歌曲详情
@@ -25,6 +29,17 @@ export default {
     },
   },
   actions:{
+    getUserestablishList({state,commit},payload){ //获取用户创建的歌单
+      return Request.ajax('getUserestablishList',{
+        uid:payload
+      }).then(res => {
+        if(res&&res.code=='200'){
+          console.log(res)
+          commit('undataUserestablishList',res)
+        }
+        return res
+      })
+    },
     getSongName({state,commit},payload){
       return Request.ajax('getSongDetail',{
         ids:payload

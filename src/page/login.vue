@@ -54,9 +54,9 @@
     name: "login",
     data(){
       return{
-        radio:false,
-        phone:'',
-        password:'',
+        radio:true,
+        phone:'15129398890',
+        password:'wyy10086',
         userId:'',
         button_list:[
           {

@@ -24,7 +24,7 @@ export default {
     methods:{
         ...mapActions(['getSongName']),
         topSong(){
-
+            
         },
         downSong(){
 

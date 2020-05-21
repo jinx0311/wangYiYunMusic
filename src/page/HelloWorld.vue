@@ -18,7 +18,7 @@
          <van-button class="log_button" round center type="info" @click="toLogin">立即登录</van-button>
        </div>
         <van-row class="myList">
-          <van-col span="6">
+          <van-col span="6" @click='message'>
             <van-icon name="envelop-o" size=".8rem" color="rgb(255,70,56)" />
             <span>我的消息</span>
           </van-col>
@@ -190,6 +190,9 @@
     handTpId(index){
       this.topLiId=index;
       console.log(this.$route.path)
+    },
+    message(){
+      this.$router.push('/message')
     },
     showPopup() {
       this.popup = true;

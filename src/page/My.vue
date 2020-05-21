@@ -16,14 +16,32 @@
           <span>{{item.title}}</span>
         </li>
       </ul>
-      <div>
         <p @click="toRecentlyPlayed" class="playMore"><span>最近播放</span><span>更多<van-icon name="arrow" /></span></p>
-        <ul>
-          <li v-for='item in recentlyPlayed'>
-
-          </li>
-        </ul>
-      </div>
+        <div class="songList">
+          <ul class="listName">
+            <li @click='getcjlist' :class='listChange?"big":""'>创建歌单</li>
+            <li @click='getsclist' :class='!listChange?"big":""'>收藏歌单</li>
+          </ul>
+          <ul class="songListSmall" v-show='listChange'>
+            <li @click='tzsongList(item.id)' v-for='item in cjlist'>
+               <img :src="item.coverImgUrl" alt="">
+                <div class="songName">
+                  <p class="songNameSmall">{{item.name}}</p>
+                  <p class="songNameNum">{{item.trackCount}}首</p>
+                </div>
+            </li>
+          </ul>
+          <ul class="songListSmall" v-show='!listChange'>
+            <li @click='tzsongList(item.id)' v-for='item in userSongList'>
+             <img :src="item.coverImgUrl" alt="">
+                <div class="songName">
+                  <p class="songNameSmall">{{item.name}}</p>
+                  <p class="songNameNum">{{item.trackCount}}首</p>
+                </div>
+            </li>
+          </ul>
+         
+        </div>
     </div>
 </template>
 
@@ -49,7 +67,8 @@
         name: "My",
         data(){
             return{
-                recentlyPlayed:[],//最近播放
+                listChange:true,
+                cjlist:[],
                 topList:[
                     {
                         icon:dianyin,
@@ -126,26 +145,109 @@
                   icon:newSong,
                   title:"关注新歌"
                 },
+              ],
+              test:[
+                '请输入电话号码',
+                '请输入电话号码'
               ]
             }
         },
       mounted() {
-          this.getUserSongList()
+          console.log(this.userId,'这是my id')
+          this.getUserestablishList(this.userId)
+          console.log(this.userSongList,'这是数据')
+          this.cjlist.push(this.userSongList[1])
+            this.cjlist.push(this.userSongList[2])
+            this.cjlist.push(this.userSongList[3])
+            this.cjlist.push(this.userSongList[4])
       },
       methods:{
-          ...mapActions(["getUserSongList"]),
+          ...mapActions(["getUserestablishList"]),
           toRecentlyPlayed(){
             this.$router.push({path:'/recentlyPlayed'})
+          },
+          getcjlist(){
+            this.listChange=true
+            
+          },
+          getsclist(){
+            this.userSongList.splice(0,5)
+            this.listChange=false
+          },
+          tzsongList(id){
+            this.$router.push('/songList/'+id)
           }
+      },
+      computed:{
+        ...mapState({
+          userId:state=>state.userInfo.userId,
+          userSongList:state=>state.song.UserestablishList.playlist
+        })
       }
     }
 </script>
 
 <style scoped>
+  .songNameNum{
+    position: absolute;
+    bottom: 0;
+  }
+  .songNameSmall{
+    display:-webkit-box;  
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+  }
+  .songName{
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+    height: 100%;
+    position: relative;
+  }
+  .songName p{
+    margin: 0;
+    font-size: 0.3rem;
+  }
+  .songListSmall{
+    margin-top: 0.3rem;
+    font-size: 0.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .songListSmall li{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 45%;
+    height: 1.5rem;
+    justify-content: space-between;
+    margin-bottom: 0.3rem;
+  }
+  .songListSmall li img{
+    width: 37%;
+    height: 100%;
+  }
+  .big{
+    font-weight: 800;
+    color: #000;
+  }
+  .listName{
+    padding-top: .3rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    color: #bbb;
+    font-size: .38rem;
+    flex-wrap: nowrap;
+  }
+  .listName li{margin-right: .5rem;}
+  .songList{
+    padding: 0 5%;
+  }
   .playMore{
     display: flex;
     justify-content: space-between;
     padding: 0 5%;
+    font-size: .38rem;
   }
   .myMusicList img{
     width: .7px;
