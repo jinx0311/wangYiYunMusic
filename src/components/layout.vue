@@ -1,6 +1,6 @@
 <template>
   <div class="layout-wrap">
-    <div :class="[playingSongUrl?'pb60':'']"><router-view /></div>
+    <div style='height:100%' :class="[playingSongUrl?'pb60':'']"><router-view /></div>
     <player v-if="playingSongUrl"></player>
   </div>
 

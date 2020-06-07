@@ -110,7 +110,7 @@
   }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 .userInfo{
   display flex
   flex-wrap nowrap

@@ -19,10 +19,27 @@ export default {
 </script>
 
 <style>
+body{
+  height: 100vh;
+}
+.layout-wrap{
+  height:100%
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  height: 100%;
+}
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 5%;
+  box-sizing: border-box;
+  height: 1.3rem;
+  font-size: 0.4rem;
 }
 </style>

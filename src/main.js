@@ -9,6 +9,8 @@
  import 'lib-flexible/flexible'
 import Vuex from 'vuex'
 import store from './store'
+import animated from 'animate.css' // npm install animate.css --save安装，在引入
+Vue.use(animated)
 
 Vue.use(Vuex)
 

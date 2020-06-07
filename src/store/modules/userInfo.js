@@ -7,9 +7,21 @@ export default {
     testCount:0,
     Private:[],//用户私信
     comment:[],//用户收到的评论
-    MentionMe:[] //@我的消息
+    MentionMe:[], //@我的消息
+    notices:[],
+    follows:[], //获取用户关注列表
+    followeds:[],//获取用户粉丝列表
   },
   mutations:{
+    updateFolloweds(state,payload){
+      state.followeds=payload
+    },
+    updateFollows(state,payload){
+      state.follows=payload
+    },
+    updateNotices(state,payload){ //获取我的通知
+      state.notices=payload
+    },
     updateMentionMe(state,payload){ //更新@我的消息
       state.MentionMe=payload
     },
@@ -33,6 +45,42 @@ export default {
     },
   },
   actions:{
+    getFolloweds({state,commit},payload){ //获取我的粉丝
+      return Request.ajax('followeds',{
+        uid:state.userId
+      }).then(res=>{
+        if(res&&res.code=='200'){
+          console.log(res)
+          commit('updateFolloweds',{
+            follows:res
+          })
+        }
+      })
+    },
+    getFollows({state,commit},payload){ //获取我的关注
+      return Request.ajax('follows',{
+        uid:state.userId
+      }).then(res=>{
+        if(res&&res.code=='200'){
+          console.log(res)
+          commit('updateFollows',{
+            follows:res
+          })
+        }
+      })
+    },
+    getNotices({state,commit},payload){ //获取我的通知
+      return Request.ajax('getNotices',{
+        limit:40
+      }).then(res => {
+        if(res&&res.code=='200'){
+          console.log(res)
+          commit('updateNotices',{
+            comment:res
+          })
+        }
+      })
+    },
     getMentionMe({state,commit},payload){ //获取@我的消息
       return Request.ajax('getMentionMe',{
         limit:20

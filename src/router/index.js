@@ -12,16 +12,41 @@ import songDetails from '@/page/My/songDetails'
 import login from '@/page/login'
 import recentlyPlayed from '@/page/My/RecentlyPlayed'
 import message from '@/page/message'
+import search from '@/page/helloWorld/search'
+import hotList from '@/page/helloWorld/hotList'
+import resultList from '@/page/helloWorld/resultList'
+import myFriend from '@/page/My/myFriend'
+import {mapGetters} from 'vuex'
 Vue.use(Router)
 
-export default new Router({
+
+const router =  new Router({
   routes: [
     {
       path: '/',
       name: 'index',
       component: layout,
       redirect:'/helloworld/find',
-      children:[ {
+      children:[
+      {
+        path:'search',//最近播放
+        name:search,
+        component:search,
+        redirect:'/search/hotList',
+        children:[
+          {
+            path:'hotList',//热搜列表
+            name:hotList,
+            component:hotList,
+          },
+          {
+            path:'resultList',//搜索结果
+            name:'resultList',
+            component:resultList,
+          }
+        ]
+      },
+      {
         path:'recentlyPlayed',//最近播放
         name:recentlyPlayed,
         component:recentlyPlayed,
@@ -30,6 +55,11 @@ export default new Router({
         path:'message',//我的消息
         name:message,
         component:message,
+      },
+      {
+        path:'myFriend',//我的朋友
+        name:myFriend,
+        component:myFriend,
       },
         {
           path:'helloworld',
@@ -81,3 +111,17 @@ export default new Router({
     }
   ]
 })
+// router.beforeEach(function (to, from, next) {
+//   console.log(to.path)
+//   console.log(router.app.$options.store.state.userInfo.userId)
+
+//   if (router.app.$options.store.state.userInfo.userId==''&&to.path!='/login') {
+//     router.push('/login')
+//     console.log('.haha ')
+//   } else {
+//     next()
+//   }
+// })
+
+
+export default router;

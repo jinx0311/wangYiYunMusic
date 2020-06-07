@@ -5,8 +5,26 @@
 </template>
 
 <script>
+import {mapState,mapMutations,mapActions} from 'vuex'
     export default {
-        name: "video"
+        name: "video",
+        data(){
+            return{
+
+            }
+        },
+        methods:{
+            ...mapActions(['getVideo'])
+        },
+        computed:{
+            ...mapState({
+                video:state=>state.find.video
+            })
+        },
+        mounted(){
+            this.getVideo()
+            console.log(this.video)
+        }
     }
 </script>
 

@@ -77,5 +77,37 @@ export default {
   'getMentionMe':{
     'name':'获取@我的消息',
     'path':'/msg/forwards'
+  },
+  'getNotices':{
+    'name':'获取我的通知',
+    'path':'/msg/notices'
+  },
+  
+  'searchHot':{
+    'name':'热搜列表简略版',
+    'path':'/search/hot/detail'
+  },
+  'search':{
+    'name':'搜索内容',
+    'path':'/search'
+  },
+  
+  'follows':{
+    'name':'获取用户关注列表',
+    'path':'/user/follows'
+  },
+  'followeds':{
+    'name':'获取用户粉丝列表',
+    'path':'/user/followeds'
+  },
+  'hotWall':{
+    'name':'获取云村热评',
+    'path':'/comment/hotwall/list'
+  },
+  'video':{
+    'name':'推荐mv',
+    'path':'/personalized/mv'
   }
+  
+
 }

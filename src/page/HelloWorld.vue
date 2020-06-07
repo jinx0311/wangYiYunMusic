@@ -5,7 +5,7 @@
         <ul class="topList">
           <li v-for="(item,index,key) in topList" :key="index" @click="handTpId(index)" :class='{active:index==topLiId}'  ><router-link :to="item.url">{{item.title}}</router-link></li>
         </ul>
-        <van-col style="text-align: right;" span="4"><van-icon name="search" size=".6rem" /></van-col>
+        <van-col style="text-align: right;" span="4"><van-icon @click="goSearch()" name="search" size=".6rem" /></van-col>
       </van-row>
       <van-popup class="popupBg" v-model="popup" position="left">
         <div class="userInfo" v-if="userInfo">
@@ -22,7 +22,7 @@
             <van-icon name="envelop-o" size=".8rem" color="rgb(255,70,56)" />
             <span>我的消息</span>
           </van-col>
-          <van-col span="6">
+          <van-col span="6" @click="toFriend()">
             <van-icon name="friends-o" size=".8rem" color="rgb(255,70,56)"  />
             <span>我的好友</span>
           </van-col>
@@ -187,6 +187,9 @@
     }
   },
   methods:{
+    goSearch(){
+      this.$router.push('/search')
+    },
     handTpId(index){
       this.topLiId=index;
       console.log(this.$route.path)
@@ -206,6 +209,9 @@
       }).then(res => {
 
       })
+    },
+    toFriend(){
+      this.$router.push('/myFriend')
     },
     ...mapActions(['getUserInfo'])
   },
@@ -228,6 +234,11 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
+  .hello{
+    display flex
+    flex-direction column
+    height 100%
+  }
   .userInfo{
     margin 0 2.5%
     padding 0 2.5%
